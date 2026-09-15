@@ -8,6 +8,10 @@ venv/
 # C++ build artifacts (пересобираются локально по README)
 backend/cpp/build/
 
+# Синтетический датасет (2240 изображений, ~27 МБ) — пересоздаётся командой
+# `python3 backend/ml/generate_dataset.py`, поэтому не хранится в репозитории
+backend/data/synthetic_defects/
+
 # OS / editor
 .DS_Store
 .vscode/
