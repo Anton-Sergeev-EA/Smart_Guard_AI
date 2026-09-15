@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# C++ build artifacts (пересобираются локально по README)
+backend/cpp/build/
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Runtime logs
+*.log
