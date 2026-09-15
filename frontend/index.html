@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>STARGUARD AI — ЭНЕРГОСТАР</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">SG</div>
+    <div>
+      <div class="brand-title">СМАРТ ГВАРД <span class="brand-en">/ STARGUARD AI</span></div>
+      <div class="brand-sub">Единый цифровой двойник изделия — от выходного контроля до предиктивной диагностики в поле · ЭНЕРГОСТАР</div>
+    </div>
+  </div>
+  <div class="topbar-stats" id="topbar-stats"></div>
+</header>
+
+<main class="layout">
+  <section class="panel fleet-panel">
+    <div class="panel-head">
+      <h2>Парк изделий — цифровые двойники</h2>
+      <div class="legend">
+        <span class="dot dot-ok"></span>Норма
+        <span class="dot dot-warning"></span>Требует внимания
+        <span class="dot dot-critical"></span>Критично
+      </div>
+    </div>
+    <div class="fleet-grid" id="fleet-grid">Загрузка...</div>
+  </section>
+
+  <section class="panel detail-panel" id="detail-panel">
+    <div class="empty-state">Выберите изделие слева, чтобы открыть цифровой паспорт</div>
+  </section>
+</main>
+
+<section class="panel qc-demo-panel">
+  <div class="panel-head">
+    <h2>Живая демонстрация: ОТК на посту сварки/резки/покраски (CNN)</h2>
+    <div class="hint">Настоящий инференс обученной свёрточной сети — выберите образец поверхности или загрузите своё изображение</div>
+  </div>
+  <div class="qc-demo-body">
+    <div class="qc-samples" id="qc-samples"></div>
+    <div class="qc-upload">
+      <label class="upload-btn">
+        Загрузить своё изображение
+        <input type="file" id="qc-file-input" accept="image/*" hidden />
+      </label>
+    </div>
+    <div class="qc-result" id="qc-result">
+      <div class="empty-state small">Результат появится здесь</div>
+    </div>
+  </div>
+</section>
+
+<section class="panel engine-panel">
+  <div class="panel-head">
+    <h2>Производительность C++ движка потоковой телеметрии</h2>
+  </div>
+  <div class="engine-body">
+    <button class="btn" id="bench-btn">Запустить бенчмарк на 2 000 000 точек</button>
+    <div id="bench-result" class="engine-result"></div>
+  </div>
+</section>
+
+<footer class="footer">
+  Технический прототип (PoC): реальная обученная CNN для контроля качества поверхности,
+  LSTM-модель раннего предупреждения, C++ движок потоковой обработки телеметрии,
+  RAG-объяснения на базе локальной базы знаний. Данные эксплуатации — синтетические
+  (в продакшене заменяются реальным потоком с СМАРТ ТМ / СМАРТ АВР и камер на линии).
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
