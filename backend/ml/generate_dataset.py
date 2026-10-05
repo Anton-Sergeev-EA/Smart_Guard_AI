@@ -10,12 +10,23 @@ rolled-in_scale, scratches), плюс класс "ok" — бездефектна
 Это даёт полноценный, воспроизводимый датасет для обучения настоящей CNN без
 зависимости от внешних источников данных.
 """
+
+import hashlib
 import os
+
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
 IMG_SIZE = 128
-CLASSES = ["ok", "scratches", "pitted_surface", "inclusion", "patches", "rolled_in_scale", "crazing"]
+CLASSES = [
+    "ok",
+    "scratches",
+    "pitted_surface",
+    "inclusion",
+    "patches",
+    "rolled_in_scale",
+    "crazing",
+]
 SEVERITY = {  # вес дефекта для расчёта Quality Score (0 = не влияет, 1 = максимально критично)
     "ok": 0.0,
     "scratches": 0.35,
@@ -87,7 +98,11 @@ def add_inclusion(arr, rng_local, n=None):
             ang = 2 * np.pi * k / rpts
             rad = rng_local.uniform(4, 14)
             pts.append((cx + rad * np.cos(ang), cy + rad * np.sin(ang)))
-        shade = int(rng_local.uniform(200, 240)) if rng_local.random() > 0.5 else int(rng_local.uniform(30, 70))
+        shade = (
+            int(rng_local.uniform(200, 240))
+            if rng_local.random() > 0.5
+            else int(rng_local.uniform(30, 70))
+        )
         draw.polygon(pts, fill=shade)
     return np.array(img, dtype=np.float64)
 
@@ -163,6 +178,12 @@ def make_image(cls, seed):
     return img
 
 
+def image_seed(cls: str, index: int, seed_offset: int = 0) -> int:
+    """Стабильный seed, не зависящий от случайного PYTHONHASHSEED процесса."""
+    digest = hashlib.sha256(f"{cls}:{index}".encode()).digest()
+    return seed_offset + int.from_bytes(digest[:4], "big") % (2**31)
+
+
 def generate(out_dir, n_per_class=320, seed_offset=0):
     os.makedirs(out_dir, exist_ok=True)
     manifest = []
@@ -170,7 +191,7 @@ def generate(out_dir, n_per_class=320, seed_offset=0):
         cls_dir = os.path.join(out_dir, cls)
         os.makedirs(cls_dir, exist_ok=True)
         for i in range(n_per_class):
-            seed = seed_offset + hash((cls, i)) % (2**31)
+            seed = image_seed(cls, i, seed_offset)
             img = make_image(cls, seed)
             path = os.path.join(cls_dir, f"{cls}_{i:04d}.png")
             img.save(path)
