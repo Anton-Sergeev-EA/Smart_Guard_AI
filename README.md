@@ -1,5 +1,7 @@
 # Smart_Guard_AI
 
+**Русский** · [English](README.en.md) · [中文](README.zh.md) · [हिन्दी](README.hi.md) · [Español](README.es.md) · [Français](README.fr.md) · [Deutsch](README.de.md) · [Italiano](README.it.md)
+
 > **Дополнительный лабораторный PoC портфолио.** Расширение функциональности
 > сейчас не планируется. Связь Quality Score и будущего отказа требует отдельного
 > эксперимента; снижение простоев, рекламаций и финансовый эффект не измерены.
